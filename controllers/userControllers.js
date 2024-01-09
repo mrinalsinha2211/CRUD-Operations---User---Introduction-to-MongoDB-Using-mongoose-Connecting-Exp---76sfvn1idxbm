@@ -35,7 +35,7 @@ router.get('/users/:id', async (req, res) => {
 });
 
 // Update a user by ID
-router.patch('/users/:id', async (req, res) => {
+// router.patch('/users/:id', async (req, res) => {
   // Implement user update logic here
   // 1. Extract the user ID from the request parameters (req.params.id)
   // 2. Extract updated user data from the request body (req.body)

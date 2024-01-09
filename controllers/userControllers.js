@@ -56,20 +56,6 @@ router.patch('/users/:id', async (req, res) => {
   }
 });
 
-router.patch('/users/:id', async (req, res) => {
-  const userId = req.params.id;
-  const updateBody = req.body;
-  try {
-    const user = await User.findByIdAndUpdate(userId, updateBody);
-    if (user) {
-      res.status(200).json({ message: "User updated", user });
-    } else {
-      res.status(404).json({ message: "User not found" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
 
 // Delete a user by ID
 router.delete('/users/:id', async (req, res) => {

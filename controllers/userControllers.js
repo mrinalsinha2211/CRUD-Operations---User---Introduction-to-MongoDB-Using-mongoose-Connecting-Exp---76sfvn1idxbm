@@ -59,7 +59,7 @@ router.get('/users/:id', async (req, res) => {
   const userId = req.params.id;
   const updateBody = req.body;
   try {
-    const user = await User.findByIdAndUpdate(userId, updateBody);
+    const user = await User.findByIdAndUpdate(userId, updateBody, { new: true });
     if (user) {
       res.status(200).json({ message: "User updated", user });
     } else {

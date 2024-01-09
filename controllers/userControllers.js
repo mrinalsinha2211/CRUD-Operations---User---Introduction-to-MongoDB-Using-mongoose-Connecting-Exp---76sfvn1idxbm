@@ -42,17 +42,31 @@ router.patch('/users/:id', async (req, res) => {
   // 3. Use User.findByIdAndUpdate() to update the user
   // 4. Handle success: Respond with a 200 status code and the updated user data
   // 5. Handle errors: Respond with appropriate error messages and status codes
+//   const userId = req.params.id;
+//   const updateBody=req.body;
+//   try {
+//     const user=await  User.findByIdAndUpdate(userId , updateBody);
+//     if(user)
+//     {res.status(200).json({message: "User updated", user});
+//   }else{
+//     res.status(404).json({message : "User not found"});
+//   }
+//   } catch (error) {
+//     res.status(500).json({message: "Internal Server Error"});
+//   }
+// });
+  router.patch('/users/:id', async (req, res) => {
   const userId = req.params.id;
-  const updateBody=req.body;
+  const updateBody = req.body;
   try {
-    const user=await  User.findByIdAndUpdate(userId , updateBody);
-    if(user)
-    {res.status(200).json({message: "User updated", user});
-  }else{
-    res.status(404).json({message : "User not found"});
-  }
+    const user = await User.findByIdAndUpdate(userId, updateBody);
+    if (user) {
+      res.status(200).json({ message: "User updated", user });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
   } catch (error) {
-    res.status(500).json({message: "Internal Server Error"});
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 

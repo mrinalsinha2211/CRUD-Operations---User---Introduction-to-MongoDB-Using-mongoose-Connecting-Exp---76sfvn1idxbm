@@ -21,16 +21,11 @@ router.post('/users', async (req, res) => {
 
 // Retrieve a user by ID
 router.get('/users/:id', async (req, res) => {
-  // Implement user retrieval logic here
-  // 1. Extract the user ID from the request parameters (req.params.id)
-  // 2. Find the user by ID using User.findById()
-  // 3. Handle success: Respond with a 200 status code and the user data
-  // 4. Handle errors: Respond with appropriate error messages and status codes
   const userId = req.params.id;
   try {
-    const user=await  User.findById({userId});
-    if(user)
-    {res.status(200).json({message:"Profile data", user});
+    const user=await  User.findById(userId);
+    if(user){
+      res.status(200).json({message:"Profile data", user});
   }else{
     res.status(404).json({message : "User not found"});
   }
@@ -50,7 +45,7 @@ router.patch('/users/:id', async (req, res) => {
   const userId = req.params.id;
   const updateBody=req.body;
   try {
-    const user=await  User.findByIdAndUpdate({userId , updateBody});
+    const user=await  User.findByIdAndUpdate(userId , updateBody);
     if(user)
     {res.status(200).json({message: "User updated", user});
   }else{
@@ -58,6 +53,21 @@ router.patch('/users/:id', async (req, res) => {
   }
   } catch (error) {
     res.status(500).json({message: "Internal Server Error"});
+  }
+});
+
+router.patch('/users/:id', async (req, res) => {
+  const userId = req.params.id;
+  const updateBody = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(userId, updateBody);
+    if (user) {
+      res.status(200).json({ message: "User updated", user });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
@@ -70,7 +80,7 @@ router.delete('/users/:id', async (req, res) => {
   // 4. Handle errors: Respond with appropriate error messages and status codes
   const userId = req.params.id;
   try {
-    const user=await  User.findByIdAndDelete({userId});
+    const user=await  User.findByIdAndDelete(userId);
     if(user)
     {res.status(200).json({message: "User deleted"});
   }else{
